@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      Checkout
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="paymentMethod">
+      <ion-segment-button  value="Boleto">
+        Boleto
+      </ion-segment-button>
+      <ion-segment-button  value="CREDIT_CARD">
+        Cartão de crédito
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="paymentMethod">
+    <ion-list *ngSwitchCase="'Boleto'">
+      <ion-item>
+        <ion-card>
+          <ion-card-header>
+            Total a pagar: <strong>{{cart.total}}</strong>
+          </ion-card-header>
+          <ion-card-content>
+            <button ion-button>Gerar boleto</button>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'CREDIT_CARD'">
+      <ion-item>
+        <ion-label>Número do cartão</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="creditCard.num"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Código de segurança</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="creditCard.cvv"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Mês - Expiração</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="creditCard.monthExp"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ano - Expiração</ion-label>
+        <ion-input type="text" value="" [(ngModel)]="creditCard.yearExp"></ion-input>
+      </ion-item>
+
+      <button ion-button (click)="paymentCreditCart()">Pagar</button>
+    </ion-list>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let o of cart.items">
+      {{o.name}} - R$ {{o.price}}
+    </ion-item>
+  </ion-list>
+
+</ion-content>
