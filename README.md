@@ -5,3 +5,10 @@ Usando:
 Ionic CLI 3.19.1
 Node v6.4.0
 
+##Como rodar o projeto
+
+```bash
+$ npm install
+$ ionic serve
+```
+
